@@ -1,0 +1,23 @@
+.main-nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    margin: 15px 20px 0 20px;
+    transition: .5s;
+}
+
+.secondary-nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    margin: 15px 20px 0 20px;
+}
+
+.main-nav-link:hover{
+    margin-top: 8px;
+    transition: .5s;
+}
+
+.active {
+    color: #8751DB;
+}

@@ -1,0 +1,18 @@
+.button {
+    width: 200px;
+    height: 60px;
+    margin: 10px auto;
+    background: white;
+    border-radius: 5px;
+    border: 2px solid #80DB3B;
+    box-shadow: 1px 3px 4px gray;
+    font: inherit;
+    font-size: 200%;
+    font-weight: normal;
+    transition: .2s;
+}
+
+.button:hover {
+    background: #80DB3B;
+    cursor: pointer;
+}

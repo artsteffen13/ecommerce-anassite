@@ -14,6 +14,7 @@ const app = express();
 const sess = {
     secret: keys.secret,
     cookie: {maxAge: 60 * 60 * 24},
+    maxAge: 60*60*24,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection })

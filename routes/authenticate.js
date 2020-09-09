@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../schemas/userSchema');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const requireLogin = require('../middleware/loginRequired');
 
 module.exports = (app) => {
     app.get('/logout', function(req, res){
@@ -43,14 +44,30 @@ module.exports = (app) => {
         })
     });
 
-
+    app.post('/account/editaccount', requireLogin, (req, res) => {
+        User.updateOne({_id: req.body.id}, {
+            $set: {
+                user: req.body.username,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                address: {
+                    street: req.body.street,
+                    city: req.body.city,
+                    state: req.body.state,
+                    zipcode: req.body.zipcode
+                },
+                phoneNumber: req.body.phoneNumber
+            }
+        }).exec();
+        res.send('Success!')
+    });
 
     app.post('/login/authorize', passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/loginIncorrect'
     }));
 
-    app.get('/userinfo', (req, res) => {
+    app.get('/userinfo', requireLogin, (req, res) => {
         if (!req.user) {
             return null
         } else {

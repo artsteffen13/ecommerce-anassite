@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     withStyles,
     makeStyles,
@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Signup = () => {
+const EditAccount = (props) => {
     const [signUpInfo, setSignUpInfo] = useState({
+        id: '',
         username: '',
         password: '',
         firstName: '',
@@ -61,20 +62,38 @@ const Signup = () => {
 
     const classes = useStyles();
 
-    const createProfile = (e) => {
-        e.preventDefault();
-        axios.post('/signup/newuser', signUpInfo)
+    useEffect(() => {
+        axios.get('/userinfo')
             .then(info => {
-                console.log(info.data);
+                const data = info.data;
+                setSignUpInfo({
+                    id: data.id,
+                    username: data.email,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    street: data.address.street,
+                    city: data.address.city,
+                    state: data.address.state,
+                    zipcode: data.address.zipcode,
+                    phoneNumber: data.phoneNumber
+                })
+            })
+            .catch(err => alert(err))
+    }, []);
+
+    const editProfile = (e) => {
+        e.preventDefault();
+        axios.post('/account/editaccount', signUpInfo)
+            .then(info => {
                 alert(info.data);
                 if (info.data === 'Success!') {
-                    window.location.href = '/login'
+                    window.location.href = '/myaccount'
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => alert(err))
     };
 
-    const handleLoginInfoChange = (e) => {
+    const handleInfoChange = (e) => {
         const {name, value} = e.target;
         setSignUpInfo(prevValues => {
             return (
@@ -85,9 +104,9 @@ const Signup = () => {
 
     return (
         <div>
-            <h1>Signup</h1>
+            <h1>Edit your account info</h1>
             <hr/>
-            <form onSubmit={createProfile} className={classes.root} noValidate>
+            <form onSubmit={editProfile} className={classes.root} noValidate>
                 <CssTextField
                     className={classes.margin}
                     label="Email"
@@ -95,18 +114,7 @@ const Signup = () => {
                     id="username"
                     name="username"
                     value={signUpInfo.username}
-                    onChange={handleLoginInfoChange}
-                />
-                <div className="break" />
-                <CssTextField
-                    className={classes.margin}
-                    type="password"
-                    label="Password"
-                    variant="outlined"
-                    id="password"
-                    name="password"
-                    value={signUpInfo.password}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                 />
                 <div className="break" />
                 <CssTextField
@@ -117,7 +125,7 @@ const Signup = () => {
                     id="firstName"
                     name="firstName"
                     value={signUpInfo.firstName}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                     style={{minWidth: '192px', maxWidth: '192px'}}
                 />
                 <CssTextField
@@ -128,7 +136,7 @@ const Signup = () => {
                     id="lastName"
                     name="lastName"
                     value={signUpInfo.lastName}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                     style={{minWidth: '192px', maxWidth: '192px'}}
                 />
                 <div className="break" />
@@ -140,7 +148,7 @@ const Signup = () => {
                     id="street"
                     name="street"
                     value={signUpInfo.street}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                 />
                 <div className="break" />
                 <CssTextField
@@ -151,7 +159,7 @@ const Signup = () => {
                     id="city"
                     name="city"
                     value={signUpInfo.city}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                     style={{minWidth: '180px', maxWidth: '180px'}}
                 />
                 <CssTextField
@@ -162,7 +170,7 @@ const Signup = () => {
                     id="select"
                     name="state"
                     value={signUpInfo.state}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                     style={{minWidth: '90px', maxWidth: '90px'}}
                     select
                 >
@@ -225,7 +233,7 @@ const Signup = () => {
                     id="zipcode"
                     name="zipcode"
                     value={signUpInfo.zipcode}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                     style={{minWidth: '100px', maxWidth: '100px'}}
                 />
                 <div className="break" />
@@ -237,13 +245,13 @@ const Signup = () => {
                     id="phoneNumber"
                     name="phoneNumber"
                     value={signUpInfo.phoneNumber}
-                    onChange={handleLoginInfoChange}
+                    onChange={handleInfoChange}
                 />
                 <div className="break" />
-                <input type="submit" value="Submit" className="button" />
+                <input type="submit" value="Save" className="button" />
             </form>
         </div>
     );
 };
 
-export default Signup;
+export default EditAccount;

@@ -9,6 +9,7 @@ import Signup from "./login/Signup";
 import axios from 'axios';
 import LoginIncorrect from "./login/LoginIncorrect";
 import MyAccount from "./MyAccount";
+import EditAccount from "./login/EditAccount";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -80,6 +81,10 @@ function App() {
             <Route
                 path='/myaccount'
                 render={(props) => <MyAccount {...props} userInfo={userInfo} />}
+            />
+            <Route
+                path='/editaccount'
+                render={(props) => <EditAccount {...props} userInfo={userInfo} />}
             />
         </Switch>
     </div>

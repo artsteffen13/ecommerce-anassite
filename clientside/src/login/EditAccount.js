@@ -7,6 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import './login.css';
 import axios from 'axios';
 import MenuItem from "@material-ui/core/MenuItem";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const CssTextField = withStyles({
     root: {
@@ -39,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         marginRight: 'auto'
     },
+    root2: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
     margin: {
         margin: theme.spacing(1),
         minWidth: '400px',
@@ -46,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const EditAccount = (props) => {
+const EditAccount = () => {
     const [signUpInfo, setSignUpInfo] = useState({
         id: '',
         username: '',
@@ -59,6 +71,8 @@ const EditAccount = (props) => {
         zipcode: '',
         phoneNumber: ''
     });
+    const [open, setOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
 
     const classes = useStyles();
 
@@ -85,12 +99,16 @@ const EditAccount = (props) => {
         e.preventDefault();
         axios.post('/account/editaccount', signUpInfo)
             .then(info => {
-                alert(info.data);
                 if (info.data === 'Success!') {
-                    window.location.href = '/myaccount'
+                    setOpen(true);
+                    setTimeout(() => {
+                        window.history.back()
+                    }, 2000)
                 }
             })
-            .catch(err => alert(err))
+            .catch(() => {
+                setErrorOpen(true);
+            })
     };
 
     const handleInfoChange = (e) => {
@@ -100,6 +118,14 @@ const EditAccount = (props) => {
                 {...prevValues, [name]: value}
             )
         })
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrorOpen(false);
     };
 
     return (
@@ -250,6 +276,16 @@ const EditAccount = (props) => {
                 <div className="break" />
                 <input type="submit" value="Save" className="button" />
             </form>
+            <Snackbar open={open}>
+                <Alert severity="success">
+                    Your information has successfully been updated!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Something went wrong, please try again!
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

@@ -6,12 +6,13 @@ const saltRounds = 10;
 const requireLogin = require('../middleware/loginRequired');
 
 module.exports = (app) => {
-    app.get('/logout', function(req, res){
+    app.get('/logout', function (req, res) {
         req.logout();
         res.send('Successfully logged out');
     });
 
     app.post('/signup/newuser', (req, res) => {
+        console.log(req.body)
         User.findOne({user: req.body.username}, function (err, user) {
             if (err) {
                 res.send('Something went wrong, please try again');
@@ -19,11 +20,11 @@ module.exports = (app) => {
             if (user) {
                 return res.send('user exists');
             }
-            if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
+            if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName || !req.body.street || !req.body.city || !req.body.state || !req.body.zipcode || !req.body.phoneNumber) {
                 return res.send('all fields required');
             }
             if (!user) {
-                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                     const newUser = new User({
                         user: req.body.username,
                         password: hash,
@@ -62,12 +63,12 @@ module.exports = (app) => {
         res.send('Success!')
     });
 
-    app.post('/login/authorize', passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/loginIncorrect'
-    }));
+    app.post('/login/authorize', passport.authenticate('local'),
+    function(req, res) {
+        res.send('Success!');
+    });
 
-    app.get('/userinfo', requireLogin, (req, res) => {
+    app.get('/userinfo', (req, res) => {
         if (!req.user) {
             return null
         } else {

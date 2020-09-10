@@ -7,6 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import './login.css';
 import axios from 'axios';
 import MenuItem from "@material-ui/core/MenuItem";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const CssTextField = withStyles({
     root: {
@@ -58,6 +64,10 @@ const Signup = () => {
         zipcode: '',
         phoneNumber: ''
     });
+    const [open, setOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
+    const [errorUserExists, setErrorUserExists] = useState(false);
+    const [errorFieldsRequired, setErrorFieldsRequired] = useState(false);
 
     const classes = useStyles();
 
@@ -65,13 +75,22 @@ const Signup = () => {
         e.preventDefault();
         axios.post('/signup/newuser', signUpInfo)
             .then(info => {
-                console.log(info.data);
-                alert(info.data);
                 if (info.data === 'Success!') {
-                    window.location.href = '/login'
+                    setOpen(true);
+                    setTimeout(() => {
+                        window.history.back();
+                    }, 3000);
+                }
+                if (info.data === 'user exists') {
+                    setErrorUserExists(true);
+                }
+                if (info.data === 'all fields required') {
+                    setErrorFieldsRequired(true);
                 }
             })
-            .catch(err => console.log(err))
+            .catch(() => {
+                setErrorOpen(true);
+            })
     };
 
     const handleLoginInfoChange = (e) => {
@@ -81,6 +100,16 @@ const Signup = () => {
                 {...prevValues, [name]: value}
             )
         })
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrorOpen(false);
+        setErrorUserExists(false);
+        setErrorFieldsRequired(false);
     };
 
     return (
@@ -242,6 +271,26 @@ const Signup = () => {
                 <div className="break" />
                 <input type="submit" value="Submit" className="button" />
             </form>
+            <Snackbar open={open}>
+                <Alert severity="success">
+                    Success! Please log in.
+                </Alert>
+            </Snackbar>
+            <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Something went wrong, please try again!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={errorUserExists} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="warning">
+                    Username already exists!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={errorFieldsRequired} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="warning">
+                    All fields required!
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

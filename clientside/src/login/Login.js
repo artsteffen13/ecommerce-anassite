@@ -6,6 +6,13 @@ import {
 import TextField from '@material-ui/core/TextField';
 import './login.css';
 import {NavLink} from "react-router-dom";
+import axios from 'axios';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const CssTextField = withStyles({
     root: {
@@ -49,8 +56,24 @@ const Login = () => {
         username: '',
         password: ''
     });
+    const [open, setOpen] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
 
     const classes = useStyles();
+
+    const login = (e) => {
+        e.preventDefault();
+        axios.post('/login/authorize', loginInfo)
+            .then(() => {
+                setOpen(true);
+                setTimeout(() => {
+                    window.location.href = '/'
+                }, 2000)
+            })
+            .catch(() => {
+                setErrorOpen(true);
+            })
+    }
 
     const handleLoginInfoChange = (e) => {
         const {name, value} = e.target;
@@ -61,6 +84,14 @@ const Login = () => {
         })
     };
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrorOpen(false);
+    };
+
     return (
         <div>
             <h1>Login</h1>
@@ -68,8 +99,7 @@ const Login = () => {
             <form
                 className={classes.root}
                 noValidate
-                method="POST"
-                action="/login/authorize"
+                onSubmit={login}
             >
                 <CssTextField
                     className={classes.margin}
@@ -99,6 +129,16 @@ const Login = () => {
                 <b>Click here</b>
             </NavLink>
             </p>
+            <Snackbar open={open}>
+                <Alert severity="success">
+                    Success!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={errorOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Username and/or Password incorrect, please try again!
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

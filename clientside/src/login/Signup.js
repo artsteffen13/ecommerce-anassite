@@ -78,7 +78,7 @@ const Signup = () => {
                 if (info.data === 'Success!') {
                     setOpen(true);
                     setTimeout(() => {
-                        window.location.href = '/'
+                        window.history.back();
                     }, 3000);
                 }
                 if (info.data === 'user exists') {

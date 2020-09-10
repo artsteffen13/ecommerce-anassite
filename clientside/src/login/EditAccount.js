@@ -102,7 +102,7 @@ const EditAccount = () => {
                 if (info.data === 'Success!') {
                     setOpen(true);
                     setTimeout(() => {
-                        window.location.href = '/'
+                        window.location.href = '/myaccount'
                     }, 2000)
                 }
             })

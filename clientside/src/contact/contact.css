@@ -1,0 +1,9 @@
+.contact {
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    text-align: center;
+    font-weight: normal;
+
+}

@@ -8,11 +8,12 @@ import Login from "./login/Login";
 import Signup from "./login/Signup";
 import axios from 'axios';
 import LoginIncorrect from "./login/LoginIncorrect";
-import MyAccount from "./MyAccount";
+import MyAccount from "./login/MyAccount";
 import EditAccount from "./login/EditAccount";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [awaitingLogin, setAwaitingLogin] = useState(true);
     const [userInfo, setUserInfo] = useState({
         id: '',
         email: '',
@@ -28,6 +29,7 @@ function App() {
     });
 
     useEffect(() => {
+        setAwaitingLogin(true);
         axios.get('/userinfo')
             .then(info => {
                 if (info.data.id) {
@@ -46,6 +48,7 @@ function App() {
                             zipcode: items.address.zipcode
                         }
                     });
+                    setAwaitingLogin(false);
                 } else {
                     setIsLoggedIn(false)
                     setUserInfo({
@@ -61,6 +64,7 @@ function App() {
                             zipcode: ''
                         }
                     });
+                    setAwaitingLogin(false);
                 }
 
             })
@@ -70,6 +74,7 @@ function App() {
     <div>
       <Header
         isLoggedIn={isLoggedIn}
+        awaitingLogin={awaitingLogin}
       />
         <Switch>
             <Route exact path="/" component={Home}/>

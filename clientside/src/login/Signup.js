@@ -113,7 +113,7 @@ const Signup = () => {
     };
 
     return (
-        <div>
+        <div className='animate__animated animate__fadeIn'>
             <h1>Signup</h1>
             <hr/>
             <form onSubmit={createProfile} className={classes.root} noValidate>

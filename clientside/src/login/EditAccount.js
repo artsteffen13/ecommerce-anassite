@@ -129,7 +129,7 @@ const EditAccount = () => {
     };
 
     return (
-        <div>
+        <div className='animate__animated animate__fadeIn'>
             <h1>Edit your account info</h1>
             <hr/>
             <form onSubmit={editProfile} className={classes.root} noValidate>

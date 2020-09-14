@@ -50,7 +50,7 @@ const Header = (props) => {
     return (
         <div className={classes.root}>
             <AppBar
-                className="background"
+                className="background animate__animated animate__fadeIn"
                 style={{
                     flexDirection: 'row',
                     background: 'linear-gradient(0.25turn, #80DB3B, #80DB3B, #46DB66)',
@@ -111,7 +111,7 @@ const Header = (props) => {
         <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
                     </span>
-                </span>
+                    </span>
             </AppBar>
         </div>
     );

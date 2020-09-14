@@ -52,7 +52,7 @@ const MyAccount = (props) => {
         createData('Zipcode', props.userInfo.address.zipcode),
     ];
     return (
-        <>
+        <div className='animate__animated animate__fadeIn'>
             <h1>Your Account Info</h1>
             <hr/>
             <div style={{maxWidth: '700px', margin: '40px auto 0 auto'}}>
@@ -88,7 +88,7 @@ const MyAccount = (props) => {
                     </Table>
                 </TableContainer>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -3,3 +3,13 @@
     font-size: 200%;
     padding: 0 40px 0 40px;
 }
+
+.size {
+    flex-grow: 1;
+}
+
+@media (max-width: 850px){
+    .full-size {
+        display: none;
+    }
+}

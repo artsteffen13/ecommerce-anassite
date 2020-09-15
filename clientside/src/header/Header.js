@@ -48,26 +48,27 @@ const Header = (props) => {
     }
 
     return (
-        <div className={classes.root}>
-            <AppBar
-                className="background animate__animated animate__fadeIn"
-                style={{
-                    flexDirection: 'row',
-                    background: 'linear-gradient(0.25turn, #80DB3B, #80DB3B, #46DB66)',
-                    position: 'relative'
-                }}
-            >
-                <img alt="logo" src={logo} style={{width: '100px', margin: '0 20px 0 0'}}/>
-                <MainNavItem link="/" class="main-nav-link" active="active">
-                    Home
-                </MainNavItem>
-                <MainNavItem link="/shirts" class="main-nav-link" active="active">
-                    Shirts
-                </MainNavItem>
-                <MainNavItem link="/contact" class="main-nav-link" active="active">
-                    Contact
-                </MainNavItem>
-                <span style={{position: 'absolute', top: '20px', right: '40px', borderBottom: 'none'}}>
+        <div>
+            <div className='full-size'>
+                <AppBar
+                    className="background animate__animated animate__fadeIn size"
+                    style={{
+                        flexDirection: 'row',
+                        background: 'linear-gradient(0.25turn, #80DB3B, #80DB3B, #46DB66)',
+                        position: 'relative'
+                    }}
+                >
+                    <img alt="logo" src={logo} style={{width: '100px', margin: '0 20px 0 0'}}/>
+                    <MainNavItem link="/" class="main-nav-link" active="active">
+                        Home
+                    </MainNavItem>
+                    <MainNavItem link="/shirts" class="main-nav-link" active="active">
+                        Shirts
+                    </MainNavItem>
+                    <MainNavItem link="/contact" class="main-nav-link" active="active">
+                        Contact
+                    </MainNavItem>
+                    <span style={{position: 'absolute', top: '20px', right: '40px', borderBottom: 'none'}}>
                     <MainNavItem link="#" class="secondary-nav-link" active={null}>
                     <ShoppingCartOutlinedIcon style={{fontSize: '31px'}}/>
                 </MainNavItem>
@@ -112,7 +113,8 @@ const Header = (props) => {
       </Menu>
                     </span>
                     </span>
-            </AppBar>
+                </AppBar>
+            </div>
         </div>
     );
 };

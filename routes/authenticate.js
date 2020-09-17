@@ -26,7 +26,7 @@ module.exports = (app) => {
             if (!user) {
                 bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
                     const newUser = new User({
-                        user: req.body.username,
+                        user: req.body.username.toLowerCase(),
                         password: hash,
                         firstName: req.body.firstName,
                         lastName: req.body.lastName,

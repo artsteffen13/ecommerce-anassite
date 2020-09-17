@@ -16,6 +16,7 @@ passport.deserializeUser(function (id, done) {
 
 passport.use(new LocalStrategy(
     async function(username, password, done) {
+        username = username.toLowerCase();
         User.findOne({ user: username }, function(err, user) {
             if (err) { return done(err); }
             if (!user) {

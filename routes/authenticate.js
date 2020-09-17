@@ -13,7 +13,7 @@ module.exports = (app) => {
 
     app.post('/signup/newuser', (req, res) => {
         console.log(req.body)
-        User.findOne({user: req.body.username}, function (err, user) {
+        User.findOne({user: req.body.username.toLowerCase()}, function (err, user) {
             if (err) {
                 res.send('Something went wrong, please try again');
             }

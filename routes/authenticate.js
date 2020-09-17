@@ -1,5 +1,4 @@
 const passport = require('passport');
-const mongoose = require('mongoose');
 const User = require('../schemas/userSchema');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Shirts = () => {
+const Products = () => {
     return (
         <div>
-            
+
         </div>
     );
 };
 
-export default Shirts;
+export default Products;

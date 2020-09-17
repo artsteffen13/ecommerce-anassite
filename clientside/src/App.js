@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Header from "./header/Header";
 import {Route, Switch} from 'react-router-dom';
 import Home from "./home/Home";
-import Shirts from "./shirts/Shirts";
+import Products from "./products/Products";
 import Contact from "./contact/Contact";
 import Login from "./login/Login";
 import Signup from "./login/Signup";
@@ -78,7 +78,7 @@ function App() {
       />
         <Switch>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/shirts" component={Shirts}/>
+            <Route exact path="/shirts" component={Products}/>
             <Route exact path="/contact" component={Contact}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/signup" component={Signup}/>

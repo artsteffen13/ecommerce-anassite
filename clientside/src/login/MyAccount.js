@@ -30,7 +30,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 700,
+        maxWidth: '700',
+        width: '100%'
     },
 });
 
@@ -55,7 +56,7 @@ const MyAccount = (props) => {
         <div className='animate__animated animate__fadeIn'>
             <h1>Your Account Info</h1>
             <hr/>
-            <div style={{maxWidth: '700px', margin: '40px auto 0 auto'}}>
+            <div style={{width: '95%', maxWidth: '700px', margin: '40px auto 0 auto'}}>
                 <NavLink to='/editaccount'>
                     <Tooltip title="Edit" placement="top-end" arrow>
                         <EditOutlinedIcon

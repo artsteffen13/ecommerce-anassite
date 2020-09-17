@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     margin: {
         margin: theme.spacing(1),
-        minWidth: '400px',
+        width: '90%',
         maxWidth: '400px'
     },
 }));
@@ -147,7 +147,7 @@ const Signup = () => {
                     name="firstName"
                     value={signUpInfo.firstName}
                     onChange={handleLoginInfoChange}
-                    style={{minWidth: '192px', maxWidth: '192px'}}
+                    style={{maxWidth: '192px'}}
                 />
                 <CssTextField
                     className={classes.margin}
@@ -158,7 +158,7 @@ const Signup = () => {
                     name="lastName"
                     value={signUpInfo.lastName}
                     onChange={handleLoginInfoChange}
-                    style={{minWidth: '192px', maxWidth: '192px'}}
+                    style={{maxWidth: '192px'}}
                 />
                 <div className="break" />
                 <CssTextField
@@ -181,7 +181,7 @@ const Signup = () => {
                     name="city"
                     value={signUpInfo.city}
                     onChange={handleLoginInfoChange}
-                    style={{minWidth: '180px', maxWidth: '180px'}}
+                    style={{maxWidth: '180px'}}
                 />
                 <CssTextField
                     className={classes.margin}
@@ -192,7 +192,7 @@ const Signup = () => {
                     name="state"
                     value={signUpInfo.state}
                     onChange={handleLoginInfoChange}
-                    style={{minWidth: '90px', maxWidth: '90px'}}
+                    style={{maxWidth: '90px'}}
                     select
                 >
                     <MenuItem value="AL">AL</MenuItem>
@@ -255,7 +255,7 @@ const Signup = () => {
                     name="zipcode"
                     value={signUpInfo.zipcode}
                     onChange={handleLoginInfoChange}
-                    style={{minWidth: '100px', maxWidth: '100px'}}
+                    style={{maxWidth: '100px'}}
                 />
                 <div className="break" />
                 <CssTextField

@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         flexDirection: 'column',
-        width: '350px',
+        width: '90%',
+        maxWidth: '350px',
         marginLeft: 'auto',
         marginRight: 'auto'
     },

@@ -140,36 +140,12 @@ const Header = (props) => {
                 <AppBar
                     className="background animate__animated animate__fadeIn size"
                     style={{
-                        background: 'linear-gradient(0.25turn, #80DB3B, #80DB3B, #46DB66)',
+                        background: '#80DB3B',
                         position: 'relative',
                         display: 'flex',
                         flexDirection: 'row'
                     }}
                 >
-                    {/*<p*/}
-                    {/*    onClick={sliderController}*/}
-                    {/*    style={{*/}
-                    {/*        position: 'absolute',*/}
-                    {/*        top: '15px',*/}
-                    {/*        left: '55px',*/}
-                    {/*        margin: '0',*/}
-                    {/*        fontSize: '100%',*/}
-                    {/*        fontWeight: 'bold',*/}
-                    {/*        color: 'black',*/}
-                    {/*        cursor: 'pointer'*/}
-                    {/*    }}*/}
-                    {/*>*/}
-                    {/*    SliderMenu*/}
-                    {/*</p>*/}
-                    {/*<img*/}
-                    {/*    onClick={sliderController}*/}
-                    {/*    alt="menu" src={logo}*/}
-                    {/*    style={{*/}
-                    {/*        width: '100px',*/}
-                    {/*        margin: '0 20px 0 0',*/}
-                    {/*        cursor: 'pointer'*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                     <img
                         alt="logo" src={logo}
                         style={{

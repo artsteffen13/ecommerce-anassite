@@ -245,6 +245,9 @@ const Signup = () => {
                     <MenuItem value="WV">WV</MenuItem>
                     <MenuItem value="WI">WI</MenuItem>
                     <MenuItem value="WY">WY</MenuItem>
+                    <MenuItem value="AE">AE</MenuItem>
+                    <MenuItem value="AP">AP</MenuItem>
+                    <MenuItem value="AA">AA</MenuItem>
                 </CssTextField>
                 <CssTextField
                     className={classes.margin}

@@ -11,7 +11,9 @@ const userSchema = new mongoose.Schema({
         state: String,
         zipcode: String
     },
-    phoneNumber: String
+    phoneNumber: String,
+    secretQuestion: String,
+    secretAnswer: String
 });
 
 module.exports = mongoose.model('users', userSchema);

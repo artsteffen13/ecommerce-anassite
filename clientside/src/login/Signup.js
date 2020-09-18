@@ -62,7 +62,9 @@ const Signup = () => {
         city: '',
         state: '',
         zipcode: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        secretQuestion: '',
+        secretAnswer: ''
     });
     const [open, setOpen] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
@@ -269,6 +271,28 @@ const Signup = () => {
                     id="phoneNumber"
                     name="phoneNumber"
                     value={signUpInfo.phoneNumber}
+                    onChange={handleLoginInfoChange}
+                />
+                <div className="break" />
+                <CssTextField
+                    className={classes.margin}
+                    type="text"
+                    label="Secret Question"
+                    variant="outlined"
+                    id="secretQuestion"
+                    name="secretQuestion"
+                    value={signUpInfo.secretQuestion}
+                    onChange={handleLoginInfoChange}
+                />
+                <div className="break" />
+                <CssTextField
+                    className={classes.margin}
+                    type="text"
+                    label="Secret Answer"
+                    variant="outlined"
+                    id="secretAnswer"
+                    name="secretAnswer"
+                    value={signUpInfo.secretAnswer}
                     onChange={handleLoginInfoChange}
                 />
                 <div className="break" />

@@ -3,6 +3,7 @@ const User = require('../schemas/userSchema');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const requireLogin = require('../middleware/loginRequired');
+const _ = require('lodash');
 
 module.exports = (app) => {
     app.get('/logout', function (req, res) {
@@ -19,7 +20,7 @@ module.exports = (app) => {
             if (user) {
                 return res.send('user exists');
             }
-            if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName || !req.body.street || !req.body.city || !req.body.state || !req.body.zipcode || !req.body.phoneNumber) {
+            if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName || !req.body.street || !req.body.city || !req.body.state || !req.body.zipcode || !req.body.phoneNumber || !req.body.secretQuestion || !req.body.secretAnswer) {
                 return res.send('all fields required');
             }
             if (!user) {
@@ -27,15 +28,17 @@ module.exports = (app) => {
                     const newUser = new User({
                         user: req.body.username.toLowerCase(),
                         password: hash,
-                        firstName: req.body.firstName,
-                        lastName: req.body.lastName,
+                        firstName: _.capitalize(req.body.firstName),
+                        lastName: _.capitalize(req.body.lastName),
                         address: {
                             street: req.body.street,
                             city: req.body.city,
                             state: req.body.state,
                             zipcode: req.body.zipcode
                         },
-                        phoneNumber: req.body.phoneNumber
+                        phoneNumber: req.body.phoneNumber,
+                        secretQuestion: req.body.secretQuestion.toLowerCase(),
+                        secretAnswer: req.body.secretAnswer.toLowerCase()
                     });
                     newUser.save();
                     res.send('Success!');

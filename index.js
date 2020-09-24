@@ -32,16 +32,13 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/home', (req, res) => {
-    res.send('Hello')
-});
-
 mongoose.connect(keys.mongoDbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 require('./routes/authenticate')(app);
+require('./routes/products')(app);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('clientside/build'));

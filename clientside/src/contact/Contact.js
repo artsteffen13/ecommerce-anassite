@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './contact.css';
 import ContactMailOutlinedIcon from '@material-ui/icons/ContactMailOutlined';
 import {makeStyles, withStyles} from "@material-ui/core/styles";

@@ -1,0 +1,14 @@
+.thumbnail {
+    width: 200px;
+    height: 200px;
+    margin: 40px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px gray;
+    transition: .5s;
+}
+
+.thumbnail:hover {
+    width: 240px;
+    height: 240px;
+    transition: .5s;
+}

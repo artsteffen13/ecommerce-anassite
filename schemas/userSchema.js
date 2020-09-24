@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber: String,
     secretQuestion: String,
-    secretAnswer: String
+    secretAnswer: String,
+    admin: String
 });
 
 module.exports = mongoose.model('users', userSchema);

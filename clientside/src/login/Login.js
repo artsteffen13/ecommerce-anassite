@@ -9,6 +9,7 @@ import {NavLink} from "react-router-dom";
 import axios from 'axios';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Spinner from "../loading/Spinner";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -59,11 +60,13 @@ const Login = () => {
     });
     const [open, setOpen] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
+    const [loading, setloading] = useState(false);
 
     const classes = useStyles();
 
     const login = (e) => {
         e.preventDefault();
+        setloading(true);
         axios.post('/login/authorize', loginInfo)
             .then(() => {
                 setOpen(true);
@@ -73,6 +76,7 @@ const Login = () => {
             })
             .catch(() => {
                 setErrorOpen(true);
+                setloading(false);
             })
     }
 
@@ -97,32 +101,34 @@ const Login = () => {
         <div className='animate__animated animate__fadeIn'>
             <h1>Login</h1>
             <hr/>
-            <form
-                className={classes.root}
-                noValidate
-                onSubmit={login}
-            >
-                <CssTextField
-                    className={classes.margin}
-                    label="Email"
-                    variant="outlined"
-                    id="username"
-                    name="username"
-                    value={loginInfo.username}
-                    onChange={handleLoginInfoChange}
-                />
-                <CssTextField
-                    className={classes.margin}
-                    type="password"
-                    label="Password"
-                    variant="outlined"
-                    id="password"
-                    name="password"
-                    value={loginInfo.password}
-                    onChange={handleLoginInfoChange}
-                />
-                <input type="submit" value="Submit" className="button" />
-            </form>
+            {loading ? <Spinner/> :
+                <form
+                    className={classes.root}
+                    noValidate
+                    onSubmit={login}
+                >
+                    <CssTextField
+                        className={classes.margin}
+                        label="Email"
+                        variant="outlined"
+                        id="username"
+                        name="username"
+                        value={loginInfo.username}
+                        onChange={handleLoginInfoChange}
+                    />
+                    <CssTextField
+                        className={classes.margin}
+                        type="password"
+                        label="Password"
+                        variant="outlined"
+                        id="password"
+                        name="password"
+                        value={loginInfo.password}
+                        onChange={handleLoginInfoChange}
+                    />
+                    <input type="submit" value="Submit" className="button"/>
+                </form>
+            }
             <p>Not signed up yet? <NavLink
                 style={{textDecoration: 'none', color: '#8751DB'}}
                 to="/signup"

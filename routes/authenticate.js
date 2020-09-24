@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const requireLogin = require('../middleware/loginRequired');
 const _ = require('lodash');
+const keys = require('../keys/keys')
 
 module.exports = (app) => {
     app.get('/logout', function (req, res) {
@@ -12,7 +13,6 @@ module.exports = (app) => {
     });
 
     app.post('/signup/newuser', (req, res) => {
-        console.log(req.body)
         User.findOne({user: req.body.username.toLowerCase()}, function (err, user) {
             if (err) {
                 res.send('Something went wrong, please try again');
@@ -74,13 +74,18 @@ module.exports = (app) => {
         if (!req.user) {
             return null
         } else {
+            let adminTrue = false;
+            if (req.user.admin === keys.adminSecret) {
+                adminTrue = true;
+            }
             res.send({
                 id: req.user.id,
                 email: req.user.user,
                 firstName: req.user.firstName,
                 lastName: req.user.lastName,
                 phoneNumber: req.user.phoneNumber,
-                address: req.user.address
+                address: req.user.address,
+                admin: adminTrue
             });
         }
     });
